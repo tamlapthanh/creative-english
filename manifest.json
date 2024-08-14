@@ -2,7 +2,7 @@
     "name": "Creative English",
     "short_name": "CreativEnglish",
     "description": "Creative English Web App.",
-    "start_url": "/index.html",
+    "start_url": "creative-english/index.html",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#0000ff",
