@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function loadDataToDiv(json_data, tagName, data_type) {
     moment.locale("vi");
-    $("div").remove(".video");
+    $("div").remove(".video"); // xoa tất cả video item hiện tại.
     $(".spinner-grow").show();
     jQuery(json_data).each(function (index, item) {
         var appendTag = "";
@@ -102,6 +102,12 @@ $(function () {
         }
   
     });
+
+    $(window).scroll(function() {
+        if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
+         
+        }
+      });
 
 
     getDataFromGoogleSheet();
