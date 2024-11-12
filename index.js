@@ -30,13 +30,18 @@ function loadDataToDiv(json_data, tagName, data_type) {
         var appendTag = "";
         if (item.Full_Path.includes(data_type)) {
             if (item.Type.includes("mp4") || item.Type.includes("jpg")) {
-                var learn_day = moment(item.Date).format('llll');
+                var learn_day = moment(item.Updated).format('llll');
                 var tooltip = item.Description;
                 var content = item.Description != "NULL" ? item.Description : learn_day;
                 var video_id = `https://drive.google.com/file/d/${item.ID}/preview`;
                 var thumbnail_id = `https://drive.google.com/thumbnail?id=${item.ID}`;
+                var background = "bg-warning";
+                if (item.Type.includes("jpg")) {
+                    background = "bg-info";
+                }
+
                 appendTag = `<div class="col-6 col-sm-6 col-md-2 video"   data-video="${video_id}" data-toggle="modal" data-target="#videoModal" >
-                                                <span class="d-none d-lg-block bg-warning">${content}</span>
+                                                <span class="d-none d-lg-block ${background} ">${content}</span>
                                                 <div class="info-box text-bg-primary" style="background-image: url('${thumbnail_id}'); background-size: cover; cursor: pointer;"> 
                                                     <div class="info-box-content" style="min-height: 200px;"> 
                                                         <span class="info-box-text d-block d-lg-none label  label-primary">${content}</span> 
@@ -73,7 +78,7 @@ $(function () {
     });
 
     $(document).on("click", ".video", function () {
-        console.log(this);
+       // console.log(this);
         var theModal = $(this).data("target"),
             videoSRC = $(this).attr("data-video"),
             videoSRCauto = videoSRC
@@ -117,7 +122,7 @@ async function getDataFromGoogleSheet() {
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js').then((registration) => {
+        navigator.serviceWorker.register('service-worker.js').then((registration) => {
             console.log('Service Worker registered with scope:', registration.scope);
         }).catch((error) => {
             console.log('Service Worker registration failed:', error);
