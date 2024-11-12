@@ -77,6 +77,11 @@ $(function () {
         loadDataToDiv(JSON_DATA, ".data_class", ref_data);
     });
 
+    function isMobile() {
+        return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      }
+
+      
     $(document).on("click", ".video", function () {
        // console.log(this);
         var theModal = $(this).data("target"),
@@ -86,6 +91,16 @@ $(function () {
         $(theModal + ' button.close').click(function () {
             $(theModal + ' iframe').attr('src', videoSRC);
         });
+
+        if (isMobile()) { // Nếu là thiết bị di động
+            const screenWidth = $(window).width();    // Lấy chiều rộng màn hình
+            const screenHeight = $(window).height();  // Lấy chiều cao màn hình
+          
+            // Cập nhật nguồn và kích thước iframe
+            $(theModal + ' iframe').css('width', (screenWidth * 0.90)+ 'px');
+            $(theModal + ' iframe').css('height', (screenHeight * 0.8) + 'px');
+        }
+  
     });
 
 
